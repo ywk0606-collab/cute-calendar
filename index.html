@@ -5,18 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kitsch Pastel Calendar</title>
   <link rel="stylesheet" href="style.css" />
+
+  <!-- SUIT 폰트 (오픈소스, 상업적 OK) -->
+  <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet">
 </head>
 <body>
-  <div class="calendar-container">
-    <div class="calendar-header">
-      <button id="prev-month" class="nav-btn">‹</button>
-      <h2 id="current-month"></h2>
-      <button id="next-month" class="nav-btn">›</button>
-    </div>
+  <div class="calendar-wrapper">
+    <div class="calendar-container">
+      <div class="calendar-header">
+        <button id="prev-month" class="nav-btn">‹</button>
+        <h2 id="current-month"></h2>
+        <button id="next-month" class="nav-btn">›</button>
+      </div>
 
-    <div class="calendar-grid" id="calendar"></div>
+      <div class="weekday-row">
+        <div class="weekday">월</div>
+        <div class="weekday">화</div>
+        <div class="weekday">수</div>
+        <div class="weekday">목</div>
+        <div class="weekday">금</div>
+        <div class="weekday sat">토</div>
+        <div class="weekday sun">일</div>
+      </div>
+
+      <div class="calendar-grid" id="calendar"></div>
+    </div>
   </div>
 
+  <!-- Modal -->
   <div id="modal" class="modal hidden">
     <div class="modal-content">
       <h3 id="modal-title"></h3>
