@@ -1,148 +1,144 @@
-body {
-  font-family: "Nunito", sans-serif;
-  background: linear-gradient(135deg, #ffe6f4, #f3e8ff);
+/* 전역 폰트 */
+* {
+  font-family: 'SUIT', sans-serif;
+  box-sizing: border-box;
   margin: 0;
-  padding: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  padding: 0;
+}
+
+/* 전체 비율 유지를 위한 래퍼 */
+.calendar-wrapper {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
 }
 
 .calendar-container {
-  width: 350px;
-  background: #ffffffd9;
-  backdrop-filter: blur(4px);
-  border-radius: 22px;
+  aspect-ratio: 1 / 1;
+  border: 3px solid #d7b0ff;
   padding: 20px;
-  box-shadow: 0 6px 20px rgba(255, 150, 200, 0.2);
-  border: 2px solid #ffd6f0;
+  background: #fff8ff;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
+/* 헤더 */
 .calendar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #d86ebf;
 }
 
-#current-month {
-  font-size: 22px;
+.calendar-header h2 {
+  font-size: 1.4rem;
   font-weight: 700;
+  color: #b06cff;
 }
 
 .nav-btn {
-  background: #ffd0e8;
-  border: none;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  font-size: 20px;
+  border: 2px solid #b06cff;
+  background: white;
+  padding: 4px 10px;
   cursor: pointer;
-  color: #a84ea3;
-  transition: 0.2s;
-}
-.nav-btn:hover {
-  background: #ffb9dd;
+  font-weight: 600;
 }
 
+/* 요일 */
+.weekday-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.weekday {
+  padding: 4px 0;
+  color: #a88ce6;
+}
+
+.weekday.sun {
+  color: #ff6b6b;
+}
+
+/* 날짜 칸 */
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  margin-top: 20px;
   gap: 6px;
+  flex-grow: 1;
 }
 
-.calendar-cell {
-  background: white;
-  height: 48px;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #a45cad;
-  font-size: 14px;
+.day {
+  border: 2px solid #e5d1ff;
+  padding: 10px 0;
+  text-align: center;
   cursor: pointer;
-  transition: 0.2s;
-  box-shadow: 0 2px 4px rgba(200, 100, 180, 0.15);
+  font-size: 0.9rem;
+  background: white;
 }
 
-.calendar-cell:hover {
-  background: #ffe8f7;
+/* 일요일 */
+.day.sun {
+  color: #ff4a4a;
+  border-color: #ffbaba;
 }
 
-.today {
-  border: 2px solid #ff74c3;
-  background: #fff2fb;
-}
-
-.event-day {
-  background: #ffd6f5 !important;
-  color: #b13798;
+/* 기념일 등록된 날짜 */
+.day.event {
+  background: #ffe4f6;
+  border-color: #ffb4e2;
+  color: #d64299;
   font-weight: 700;
 }
 
-.holiday {
-  color: #ff5a87 !important;
-  font-weight: 700;
+/* 오늘 날짜 */
+.day.today {
+  background: #e9d7ff;
+  border-color: #b892ff;
 }
 
+/* 모달 */
 .modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #00000055;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.4);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.hidden {
-  display: none;
-}
+.hidden { display: none; }
 
 .modal-content {
   background: white;
-  width: 280px;
   padding: 20px;
-  border-radius: 18px;
-  box-shadow: 0 4px 15px rgba(255, 150, 200, 0.25);
-  text-align: center;
-}
-
-.modal-content input {
-  width: 90%;
-  padding: 8px;
-  border-radius: 10px;
-  border: 1px solid #e5bbe3;
-  margin-top: 10px;
+  border: 2px solid #b06cff;
+  width: 260px;
 }
 
 .modal-buttons {
-  margin-top: 15px;
   display: flex;
   justify-content: space-between;
+  margin-top: 15px;
 }
 
 .ok-btn {
-  background: #ffb4e0;
+  background: #e0b0ff;
   border: none;
-  padding: 8px 12px;
-  border-radius: 10px;
-  cursor: pointer;
+  padding: 6px 12px;
 }
+
 .del-btn {
-  background: #ff92b2;
+  background: #ff9da1;
   border: none;
-  padding: 8px 12px;
-  border-radius: 10px;
-  cursor: pointer;
+  padding: 6px 12px;
 }
+
 .close-btn {
-  background: #d8c2ff;
+  background: #dcdcdc;
   border: none;
-  padding: 8px 12px;
-  border-radius: 10px;
-  cursor: pointer;
+  padding: 6px 12px;
 }
