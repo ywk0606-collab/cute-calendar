@@ -1,144 +1,213 @@
-/* 전역 폰트 */
+/* 전역 폰트 및 박스 모델 */
 * {
-  font-family: 'SUIT', sans-serif;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  font-family: 'SUIT', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* 전체 비율 유지를 위한 래퍼 */
+/* 색상 팔레트 정의 */
+:root {
+    --color-main-purple: #b06cff; /* 월 이동 버튼, 헤더 폰트 */
+    --color-light-purple: #e9d7ff; /* 오늘 날짜 배경 */
+    --color-bg-light: #f8f0ff; /* 달력 컨테이너 배경 */
+    --color-border-dark: #3a005c; /* 전체 테두리, 레트로 타일 굵은 테두리 */
+    --color-border-light: #d1b8ff; /* 연한 그리드 테두리 */
+    --color-day-bg: white; /* 날짜 칸 기본 배경 */
+    --color-weekday-bg: #805aff; /* 요일 배경 */
+    --color-pink-event: #ffe4f6; /* 이벤트 배경 핑크 */
+    --color-red-font: #ff4a4a; /* 일요일, 공휴일 폰트 */
+}
+
+/* 전체 비율 유지를 위한 래퍼 (최대 너비 420px) */
 .calendar-wrapper {
-  width: 100%;
-  max-width: 420px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 420px;
+  margin: 20px auto;
+  padding: 0 10px;
 }
 
+/* 달력 컨테이너: 정비율(1:1) 및 레트로 테두리 */
 .calendar-container {
-  aspect-ratio: 1 / 1;
-  border: 3px solid #d7b0ff;
-  padding: 20px;
-  background: #fff8ff;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  aspect-ratio: 1 / 1; /* 가로 세로 비율 1:1 유지 */
+  border: 5px solid var(--color-border-dark); /* 굵은 테두리 */
+  padding: 15px;
+  background: var(--color-bg-light);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 4px;
 }
 
-/* 헤더 */
+/* 헤더 (월 이동 부분) */
 .calendar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
 }
 
 .calendar-header h2 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #b06cff;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--color-main-purple);
 }
 
 .nav-btn {
-  border: 2px solid #b06cff;
-  background: white;
-  padding: 4px 10px;
-  cursor: pointer;
-  font-weight: 600;
+  border: 2px solid var(--color-border-dark);
+  background: white;
+  padding: 4px 12px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--color-border-dark);
+  border-radius: 2px;
 }
 
-/* 요일 */
+/* 요일 행: 레트로 타일 모양 (배경색 짙게) */
 .weekday-row {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 5px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0;
+  background-color: var(--color-weekday-bg); /* 짙은 배경색 */
+  color: white;
 }
 
+/* 개별 요일 칸 스타일 */
 .weekday {
-  padding: 4px 0;
-  color: #a88ce6;
+  padding: 8px 0;
+  border: 2px solid var(--color-border-dark); /* 굵은 테두리 */
+  border-top: none;
+  border-bottom: none;
+  color: white;
+}
+
+.weekday:first-child {
+    border-left: none;
+}
+.weekday:last-child {
+    border-right: none;
 }
 
 .weekday.sun {
-  color: #ff6b6b;
+  color: var(--color-red-font); /* 일요일만 붉은 폰트 */
 }
 
-/* 날짜 칸 */
+/* 날짜 그리드 */
 .calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 6px;
-  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px; /* 타일 간격 */
+  flex-grow: 1; /* 남은 공간 모두 사용 */
 }
 
-.day {
-  border: 2px solid #e5d1ff;
-  padding: 10px 0;
-  text-align: center;
-  cursor: pointer;
-  font-size: 0.9rem;
-  background: white;
+/* 개별 날짜 칸 (레트로 타일) */
+.calendar-cell.day {
+  border: 2px solid var(--color-border-dark); /* 굵은 테두리 */
+  text-align: center;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: var(--color-day-bg); /* 기본 배경: 하얗게 */
+  padding: 8px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+  min-height: 40px; /* 최소 높이 지정 */
 }
 
-/* 일요일 */
-.day.sun {
-  color: #ff4a4a;
-  border-color: #ffbaba;
+/* 빈 칸 스타일 */
+.calendar-cell.empty {
+    background: transparent;
+    border: none;
+    cursor: default;
 }
 
-/* 기념일 등록된 날짜 */
-.day.event {
-  background: #ffe4f6;
-  border-color: #ffb4e2;
-  color: #d64299;
-  font-weight: 700;
+/* 일요일 및 공휴일 폰트 색상 */
+.calendar-cell.day.sun,
+.calendar-cell.day.holiday {
+  color: var(--color-red-font);
 }
 
-/* 오늘 날짜 */
-.day.today {
-  background: #e9d7ff;
-  border-color: #b892ff;
+/* 기념일 등록된 날짜 (핑크색 배경) */
+.calendar-cell.day.event-day {
+  background: var(--color-pink-event);
+  border-color: #ff85c2;
+  color: #b7397b;
+  font-weight: 800;
 }
 
-/* 모달 */
+/* 오늘 날짜 강조 */
+.calendar-cell.day.today {
+  background: var(--color-light-purple);
+  border-color: var(--color-main-purple);
+  color: var(--color-border-dark);
+}
+
+/* 모달 스타일 (기존 스타일 유지) */
 .modal {
-  position: fixed;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: fixed;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-.hidden { display: none; }
+.hidden { display: none !important; }
 
 .modal-content {
-  background: white;
-  padding: 20px;
-  border: 2px solid #b06cff;
-  width: 260px;
+  background: white;
+  padding: 20px;
+  border: 3px solid var(--color-main-purple);
+  width: 85%;
+  max-width: 300px;
+  border-radius: 6px;
+}
+
+#modal-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--color-main-purple);
+}
+
+#event-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
 }
 
 .modal-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.modal-buttons button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
 }
 
 .ok-btn {
-  background: #e0b0ff;
-  border: none;
-  padding: 6px 12px;
+  background: #d087ff; /* 보라 */
 }
 
 .del-btn {
-  background: #ff9da1;
-  border: none;
-  padding: 6px 12px;
+  background: #ff7272; /* 빨강 */
 }
 
 .close-btn {
-  background: #dcdcdc;
-  border: none;
-  padding: 6px 12px;
+  background: #aaa; /* 회색 */
 }
